@@ -29,9 +29,10 @@ int main() {
   while (true) {
     serial.write(0x5B);
     std::size_t read_bytes = serial.read(packet.buffer, sizeof(pedals_t));
-    if (read_bytes != sizeof(pedals_t))
+    if (read_bytes != sizeof(pedals_t)) {
       std::cerr << "Wrong number of bytes read" << std::endl;
       continue;
+    }
     
     shmem[0] = packet.pedals.accelerator;
     shmem[1] = packet.pedals.brake;
