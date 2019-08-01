@@ -12,7 +12,7 @@ typedef struct __attribute__ ((packed)) pedals_t {
 
 typedef union packet_t {
   pedals_t pedals;
-  uint8_t buffer[sizeof(pedals)];
+  uint8_t buffer[sizeof(pedals_t)];
 } packet_t;
 
 
@@ -27,9 +27,11 @@ int main() {
   usleep(100);
   
   while (true) {
+    serial.write(0x5B);
     std::size_t read_bytes = serial.read(packet.buffer, sizeof(pedals_t));
     if (read_bytes != sizeof(pedals_t))
       std::cerr << "Wrong number of bytes read" << std::endl;
+      continue;
     
     shmem[0] = packet.pedals.accelerator;
     shmem[1] = packet.pedals.brake;
