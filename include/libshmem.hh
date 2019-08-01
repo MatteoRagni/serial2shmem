@@ -36,7 +36,7 @@ namespace am {
       _file_handle = shm_open(filename.c_str(), O_CREAT | O_EXCL | O_RDWR, 0600);
       if (_file_handle < 0)
         SharedMemory<T, size>::raise_c_exception("opening shared memory");
-      if (ftruncate(fd, sizeof(T) * size) != 0)
+      if (ftruncate(_file_handle, sizeof(T) * size) != 0)
         SharedMemory<T, size>::raise_c_exception("resizing shared memory");
       _data_handle = (T*)mmap(0, sizeof(T) * size, PROT_READ | PROT_WRITE, MAP_SHARED, _file_handle, 0);
       if (_data_handle == MAP_FAILED)
