@@ -20,7 +20,7 @@ int main() {
   packet_t packet;
   memset(packet.buffer, 0, sizeof(pedals_t));
   
-  am::Serial serial("/dev/ttyS3", 115200);
+  am::Serial serial("/dev/ttyACM0", 115200);
   am::SharedMemory<float, 3> shmem("/serial_bus");
   serial.open();
   serial.write(SERIAL_UNLOCK);

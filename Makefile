@@ -7,10 +7,13 @@ CFLAGS = -g -Wall -Iinclude -std=c++11
 
 default: exe
 
-libserial:
+builddir:
+	-mkdir -p build
+
+libserial: builddir
 	$(CXX) $(CFLAGS) -c src/libserial.cc -o build/libserial.o
 
-main:
+main: builddir
 	$(CXX) $(CFLAGS) -c main.cpp -o build/main.o
 
 exe: libserial main
