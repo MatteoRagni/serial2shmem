@@ -1,0 +1,4 @@
+build/*
+.vscode
+libserial.code-workspace
+test
