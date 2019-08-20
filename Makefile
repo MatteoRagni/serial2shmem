@@ -1,7 +1,7 @@
 CC = gcc
 CXX = g++
-LIBS = -lm -lrt
-CFLAGS = -g -Wall -Iinclude -std=c++11
+LIBS = -lm -lrt -lpthread
+CFLAGS = -g -pthread -Wall -Wno-comment -Iinclude -std=c++11
 
 .PHONY: default all clean
 
@@ -17,7 +17,7 @@ main: builddir
 	$(CXX) $(CFLAGS) -c main.cpp -o build/main.o
 
 exe: libserial main
-	$(CXX) build/libserial.o build/main.o -o test $(LIBS)
+	$(CXX) build/libserial.o build/main.o -o serial2shmem $(LIBS)
 
 clean:
 	-rm -f build/*.o
