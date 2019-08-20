@@ -110,7 +110,7 @@ int main(int argc, char** argv) {
   std::thread stop_question(stop_requested);
 
   am::Serial serial(options.serial_file, 115200);
-  //am::SharedMemory<float, 3> shmem(options.shmem_file);
+  am::SharedMemory<float, 3> shmem(options.shmem_file);
   COBS<pedals_t> cobs_receiver(serial_read, reinterpret_cast<void*>(&serial));
   
   serial.open();
